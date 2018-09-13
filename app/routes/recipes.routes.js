@@ -27,6 +27,10 @@ module.exports = routes => {
     
     return res.json(recipe);
   })
+
+  // TODO:
+  // Edit a recipe
+  // Delete a recipe
   
   return routes
 }

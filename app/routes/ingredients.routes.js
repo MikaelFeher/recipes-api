@@ -1,6 +1,6 @@
 const ingredients = require('../json/livsmedelsdata.json');
 
-module.exports = (routes) => {
+module.exports = routes => {
   
   // Get all ingredients
   routes.get('/', (req, res) => {
