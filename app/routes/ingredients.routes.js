@@ -4,7 +4,7 @@ module.exports = (routes) => {
   
   // Get all ingredients
   routes.get('/', (req, res) => {
-    res.json(ingredients.slice(0, 5));
+    res.json(ingredients);
   });
   
   // Get the first 5 ingredients...
