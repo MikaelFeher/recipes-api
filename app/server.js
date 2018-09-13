@@ -6,7 +6,7 @@ const ingredientsRoutes = require('./routes/ingredients.routes')(express.Router(
 const recipesRoutes = require('./routes/recipes.routes')(express.Router());
 
 // DB connection
-mongoose.connect('mongodb://localhost/RecipeProject');
+mongoose.connect('mongodb://localhost/RecipeProject', { useNewUrlParser: true });
 
 // JSON
 app.use(bodyParser.urlencoded({ extended: false }));
