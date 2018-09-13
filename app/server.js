@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/RecipeProject');
 
 const ingredientsRoutes = require('./routes/ingredients.routes')(express.Router());
 
