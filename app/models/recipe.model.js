@@ -4,6 +4,7 @@ const schema = mongoose.Schema({
   name: String,
   numberOfPeople: Number,
   ingredients: [{
+    _id: false,
     name: String,
     units: Number,
     measuringUnit : String,
