@@ -2,14 +2,14 @@ const ingredients = require('../json/livsmedelsdata.json');
 
 module.exports = routes => {
   
-  // Get all ingredients
-  routes.get('/', (req, res) => {
-    res.json(ingredients);
-  });
-  
   // Get the first 5 ingredients...
-  routes.get('/first-five', (req, res) => {
+  routes.get('/', (req, res) => {
     res.json(ingredients.slice(0, 5));
+  });
+
+  // Get all ingredients
+  routes.get('/all', (req, res) => {
+    res.json(ingredients);
   });
   
   // Find ingredients by name...

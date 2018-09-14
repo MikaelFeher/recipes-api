@@ -6,7 +6,7 @@ const ingredientsRoutes = require('./routes/ingredients.routes')(express.Router(
 const recipesRoutes = require('./routes/recipes.routes')(express.Router());
 
 // DB connection
-mongoose.connect('mongodb://localhost/RecipeProject', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/RecipeProject', { useNewUrlParser: true });
 
 // JSON
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,6 +19,11 @@ app.use('/recipes', recipesRoutes);
 // Root route
 app.get('/', (req, res) => {
   res.send('HELLO!');
+})
+
+// Catch all route...
+app.get('/*', (req, res) => {
+  res.sendStatus(418).end();
 })
 
 app.listen(3003, () => console.log('Listening on 3003'));
