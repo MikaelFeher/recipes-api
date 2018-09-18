@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const ingredientsRoutes = require('./routes/ingredients.routes')(express.Router());
@@ -7,6 +8,9 @@ const recipesRoutes = require('./routes/recipes.routes')(express.Router());
 
 // DB connection
 mongoose.connect('mongodb://localhost:27017/RecipeProject', { useNewUrlParser: true });
+
+// CORS
+app.use(cors());
 
 // JSON
 app.use(bodyParser.urlencoded({ extended: false }));
