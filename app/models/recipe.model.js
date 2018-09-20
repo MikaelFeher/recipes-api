@@ -11,7 +11,9 @@ const schema = mongoose.Schema({
     unitEquivalentInGrams: Number
   }],
   instructions: [String],
-  img: String
+  img: String,
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
 })
 
 module.exports = mongoose.model('Recipe', schema);

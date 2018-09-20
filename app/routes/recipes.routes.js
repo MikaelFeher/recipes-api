@@ -13,7 +13,6 @@ module.exports = routes => {
   // Find a recipe by name, makes partial matches...
   routes.get('/find-by-name/:name', async (req, res) => {
     const recipe = await Recipe.find({ name: { "$regex": req.params.name, "$options": "i"} }).lean().exec();
-    console.log('recipe: ', recipe)
     if (!recipe.length) return res.json({ error: 'No recipe with that name exists!' });
     
     return res.json(recipe);
