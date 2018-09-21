@@ -13,7 +13,9 @@ const schema = mongoose.Schema({
   instructions: [String],
   img: String,
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
+  updatedAt: { type: Date, default: Date.now },
+  description: String,
+  category: String
 })
 
 module.exports = mongoose.model('Recipe', schema);
