@@ -9,6 +9,12 @@ module.exports = routes => {
     
     return res.json(recipes);
   });
+
+  // Get latest recipes
+  routes.get('/latest-recipes', async (req, res) => {
+    const latestRecipes = await Recipe.find().sort({ createdAt: -1 }).limit(5).lean().exec();
+    res.json(latestRecipes);
+  })
   
   // Find a recipe by name, makes partial matches...
   routes.get('/find-by-name/:name', async (req, res) => {
