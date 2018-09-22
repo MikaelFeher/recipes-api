@@ -15,7 +15,7 @@ const schema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   description: String,
-  category: String
+  category: [String]
 })
 
 module.exports = mongoose.model('Recipe', schema);
