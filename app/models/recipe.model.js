@@ -8,14 +8,15 @@ const schema = mongoose.Schema({
     name: String,
     units: Number,
     measuringUnit : String,
-    unitEquivalentInGrams: Number
+    unitEquivalentInGrams: Number,
+    nutritionalValues: [Object]
   }],
   instructions: [String],
   img: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   description: String,
-  category: [String],
+  categories: [String],
   cookingTime: String,
   difficultyLevel: String
 })
