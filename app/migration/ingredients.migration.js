@@ -6,18 +6,21 @@ async function migration() {
     name: item.Namn,
     category: item.Huvudgrupp,
     WeightGram: item.ViktGram,
-    nutritionalValues: item.Naringsvarden.Naringsvarde.reduce((acc, nv) => acc.concat(Object.assign({}, {
-      name: nv.Namn,
-      abbreviation: nv.Forkortning,
-      value: parseFloat(nv.Varde.replace(',', '.')),
-      unit: nv.Enhet
-    })), [])
+    nutritionalValues: createNutrionalValues(item.Naringsvarden.Naringsvarde)
       .filter(item => filterNutrients(item.name))
   })), [])
 
   return await newIngredients.map(newIngredient => new Ingredient(newIngredient).save())
-    .then(result => console.log(result))
     .catch(err => console.log(err))
+}
+
+function createNutrionalValues(nutritionalValuesArray) {
+  return nutritionalValuesArray.reduce((acc, nv) => acc.concat(Object.assign({}, {
+    name: nv.Namn,
+    abbreviation: nv.Forkortning,
+    value: parseFloat(nv.Varde.replace(',', '.')),
+    unit: nv.Enhet
+  })), [])
 }
 
 function filterNutrients(name) {

@@ -27,7 +27,6 @@ module.exports = routes => {
 
   routes.get('/ingredients/migrate', (req, res) => {
     ingredientsMigration.migration()
-      .then(object => res.json(object))
       .catch(err => res.json(err))
   })
   
