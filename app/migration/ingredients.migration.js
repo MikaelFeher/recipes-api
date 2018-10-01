@@ -12,19 +12,27 @@ async function migration() {
       value: parseFloat(nv.Varde.replace(',', '.')),
       unit: nv.Enhet
     })), [])
-      .filter(item => item.name === 'Energi (kcal)'                   || 
-                      item.name === 'Protein'                         ||
-                      item.name === 'Kolhydrater'                     ||
-                      item.name === 'Socker totalt'                   ||
-                      item.name === 'Salt'                            ||
-                      item.name === 'Summa mättade fettsyror'         ||
-                      item.name === 'Summa enkelomättade fettsyror'   ||
-                      item.name === 'Summa fleromättade fettsyror'
-      )
+      .filter(item => filterNutrients(item.name))
   })), [])
 
   return await newIngredients.map(newIngredient => new Ingredient(newIngredient).save())
+    .then(result => console.log(result))
     .catch(err => console.log(err))
+}
+
+function filterNutrients(name) {
+  const itemsToFind = [
+    'Energi (kcal)',
+    'Protein', 
+    'Kolhydrater', 
+    'Socker totalt', 
+    'Salt', 
+    'Summa mättade fettsyror',
+    'Summa enkelomättade fettsyror',
+    'Summa fleromättade fettsyror'
+  ]
+
+  return itemsToFind.indexOf(name) >= 0
 }
 
 module.exports = {
