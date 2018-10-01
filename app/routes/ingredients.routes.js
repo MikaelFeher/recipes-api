@@ -1,4 +1,5 @@
 const ingredients = require('../json/livsmedelsdata.json');
+const ingredientsMigration = require('../migration/ingredients.migration');
 
 module.exports = routes => {
   
@@ -23,6 +24,12 @@ module.exports = routes => {
     
     return res.json(result);
   });
+
+  routes.get('/ingredients/migrate', (req, res) => {
+    ingredientsMigration.migration()
+      .then(object => res.json(object))
+      .catch(err => res.json(err))
+  })
   
   return routes
 }
