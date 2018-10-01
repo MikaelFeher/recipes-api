@@ -6,7 +6,7 @@ const customValidator = [uniqueName, 'Name exists']
 const schema = mongoose.Schema({
   name: {
     type: String,
-    validate: customValidator
+    // validate: customValidator
   },
   category: String,
   WeightGram: String,
