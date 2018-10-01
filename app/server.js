@@ -13,8 +13,8 @@ mongoose.connect('mongodb://localhost:27017/RecipeProject', { useNewUrlParser: t
 app.use(cors());
 
 // JSON
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit:'50mb', extended: false }));
+app.use(bodyParser.json({ limit:'50mb', extended: false }));
 
 // Routes
 app.use('/ingredients', ingredientsRoutes);
