@@ -1,5 +1,7 @@
-const ingredients = require('../json/livsmedelsdata.json');
-const ingredientsMigration = require('../migration/ingredients.migration');
+/* ONLY NECESSARY FOR MIGRATING INGREDIENTS FROM JSON-FILE TO DATABASE */
+// const ingredientsMigration = require('../migration/ingredients.migration');
+
+const Ingredient = require('../models/ingredients.model');
 
 module.exports = routes => {
   
@@ -10,6 +12,7 @@ module.exports = routes => {
 
   // Get all ingredients
   routes.get('/', (req, res) => {
+    const ingredients = ''
     res.json(ingredients);
   });
   
@@ -24,11 +27,11 @@ module.exports = routes => {
     
     return res.json(result);
   });
-
-  routes.get('/ingredients/migrate', (req, res) => {
-    ingredientsMigration.migration()
-      .catch(err => res.json(err))
-  })
+  /***** ONLY USE ONCE TO MIGRATE INGREDIENTS FROM JSON-FILE TO DATABASE *****/
+  // routes.get('/ingredients/migrate', (req, res) => {
+  //   ingredientsMigration.migration()
+  //     .catch(err => res.json(err))
+  // })
   
   return routes
 }
