@@ -9,7 +9,13 @@ const schema = mongoose.Schema({
     units: Number,
     measuringUnit : String,
     unitEquivalentInGrams: Number,
-    nutritionalValues: [Object]
+    nutritionalValues: [{
+      _id: false,
+      name: String,
+      abbreviation: String,
+      value: Number,
+      unit: String
+    }]
   }],
   instructions: [String],
   img: String,
