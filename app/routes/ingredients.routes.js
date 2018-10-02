@@ -8,7 +8,7 @@ module.exports = routes => {
   // Get all ingredients
   routes.get('/', async (req, res) => {
     const ingredients = await Ingredient.find().lean().exec();
-    if(!ingredients.length) return res.json({ error: 'There are no ingredients...' })
+    if(!ingredients.length) return res.json({ error: 'There are no ingredients...' });
 
     res.json(ingredients);
   });
@@ -16,7 +16,7 @@ module.exports = routes => {
   // Get the first 5 ingredients...
   routes.get('/five', async (req, res) => {
     const ingredients = await Ingredient.find().lean().exec();
-    if(!ingredients.length) return res.json({ error: 'There are no ingredients...' })
+    if(!ingredients.length) return res.json({ error: 'There are no ingredients...' });
 
     res.json(ingredients.slice(0, 5));
   });
@@ -27,22 +27,22 @@ module.exports = routes => {
     const ingredients = await Ingredient.find().lean().exec();
     let name = req.params.name.toLowerCase();
     
-    if(!ingredients.length) return res.json({ error: 'There are no ingredients...' })
+    if(!ingredients.length) return res.json({ error: 'There are no ingredients...' });
     if(name.length < 2) return res.json({ error: 'Name must contain atleast 2 characters.' });
     
     let result = ingredients.filter(ingredient => ingredient.name.toLowerCase().indexOf(name) == 0)
-    .reduce((acc, ingredient) => acc.concat(Object.assign({}, { name: ingredient.name, url: `http://localhost:3003/ingredients/find-by-id/${ingredient._id}` })), [])
+    .reduce((acc, ingredient) => acc.concat(Object.assign({}, { name: ingredient.name, url: `http://localhost:3003/ingredients/find-by-id/${ingredient._id}` })), []);
     
     return res.json(result);
   });
   
   // Find ingredients by id...
   routes.get('/find-by-id/:id', async (req, res) => {
-    const { id } = req.params
-    const ingredient = await Ingredient.findById(id).lean().exec()
-    if(!ingredient) return res.json({ error: 'Hm, seems like that ingredient joined the witness protection program...' })
+    const { id } = req.params;
+    const ingredient = await Ingredient.findById(id).lean().exec();
+    if(!ingredient) return res.json({ error: 'Hm, seems like that ingredient joined the witness protection program...' });
     
-    res.json(ingredient)
+    res.json(ingredient);
   })
   /***************************************************************************/
   
@@ -52,5 +52,5 @@ module.exports = routes => {
   //     .catch(err => res.json(err))
   // })
   
-  return routes
+  return routes;
 }
