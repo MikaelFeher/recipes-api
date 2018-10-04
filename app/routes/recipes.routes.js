@@ -35,8 +35,10 @@ module.exports = routes => {
     if (exists.length) return res.json({ error: 'A recipe with that name already exists!' });
     
     return new Recipe(req.body)
-      .save()
-      .then(object => res.json(object))
+      .save(err => {
+        if(err) return res.json({ error: err })
+        return res.json({ success: 'Success' })
+      })
   });
   
   // Edit a recipe
