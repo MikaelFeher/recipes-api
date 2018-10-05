@@ -10,14 +10,14 @@ const JwtStrategy = passportJWT.Strategy;
 const extractJwt = passportJWT.ExtractJwt;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const User = require('./models/user.model');
+const seedUser = require('./config/seedUser');
+// const migrationRoutes = require('./routes/migration.routes')(express.Router());
 const ingredientsRoutes = require('./routes/ingredients.routes')(express.Router());
 const recipesRoutes = require('./routes/recipes.routes')(express.Router());
 const adminRoutes = require('./routes/admin.routes')(express.Router());
-const seedUser = require('./config/seedUser');
 
 // DB CONNECTION
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
@@ -49,18 +49,23 @@ app.use(bodyParser.json({ limit:'50mb', extended: false }));
 seedUser();
 
 // ROUTES
+// app.use('/migrate', migrationRoutes);
 app.use('/ingredients', ingredientsRoutes);
 app.use('/recipes', recipesRoutes);
 app.use('/admin', passport.authenticate('jwt', { session: false }), adminRoutes);
 
 app.post('/login', async (req, res) => {
-  if(!req.body.username || !req.body.password) return res.status(400).json({ error: 'Missing email or password in the request.' })
+  if(!req.body.username || !req.body.password) return res.status(400).json({
+    error: 'Missing email or password in the request.' 
+  })
 
   const user = await User.findOne({ username: req.body.username }).lean().exec();
+
   if(!user) return res.status(400).json({ error: 'The username does not exist!' })
   if(!user) return console.log('Username does not exist');
 
   passwordMatch = await bcrypt.compare(req.body.password, user.password)
+
   if(!passwordMatch) return res.status(401).json({ error: 'Wrong password!' }) 
   
   const payload = { _id: user._id };
@@ -88,4 +93,4 @@ app.get('/*', (req, res) => {
   res.sendStatus(418).end();
 })
 
-app.listen(port, () => console.log('Listening on 3003'));
+app.listen(port, () => console.log(`Listening on ${port}`));

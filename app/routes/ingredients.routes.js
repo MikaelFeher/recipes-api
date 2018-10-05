@@ -1,5 +1,4 @@
-/* ONLY NECESSARY FOR MIGRATING INGREDIENTS FROM JSON-FILE TO DATABASE */
-// const ingredientsMigration = require('../migration/ingredients.migration');
+
 
 const Ingredient = require('../models/ingredients.model');
 
