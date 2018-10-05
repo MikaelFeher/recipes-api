@@ -7,6 +7,13 @@ This is accompanied by a frontend part that can be found [here](https://github.c
 ```
 npm install
 ```
+Then you need to set up a `.env`-file at the root of your project in which you need 2 constants:
+
+`DB_URL = [YOUR-DATABASE-URL]`
+
+`SECRET_OR_KEY = [YOUR-SECRET-KEY]`
+
+The `seedUser.js` creates an admin user in order to access protected routes. Feel free to change the password.
 
 ### Compiles and hot-reloads for development
 ```
