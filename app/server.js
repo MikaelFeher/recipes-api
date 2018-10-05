@@ -65,7 +65,12 @@ app.post('/login', async (req, res) => {
   
   const payload = { _id: user._id };
   const token = jwt.sign(payload, process.env.SECRET_OR_KEY)
-  res.send(token)
+  const loggedInUser = {
+    _id: user._id,
+    isAdmin: user.isAdmin,
+    token
+  }
+  res.json({ user: loggedInUser })
 })
 
 // TEST PROTECTED ROUTE

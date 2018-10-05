@@ -2,7 +2,7 @@ const Recipe = require('../models/recipe.model');
 
 module.exports = routes => {
   // Add a new recipe
-  routes.post('/admin/recipe/add-new-recipe', async (req, res) => {
+  routes.post('/recipe/add-new-recipe', async (req, res) => {
     const exists = await Recipe.find({ name: req.body.name }).lean().exec();
     if (exists.length) return res.json({ error: 'A recipe with that name already exists!' });
     
@@ -14,7 +14,7 @@ module.exports = routes => {
   });
   
   // Edit a recipe
-  routes.put('/admin/recipe/edit-recipe/:name', async (req, res) => {
+  routes.put('/recipe/edit-recipe/:name', async (req, res) => {
     const recipes = await Recipe.find({ name: req.params.name }).lean().exec();
     const recipeToUpdate = recipes[0];
     if (!recipeToUpdate) return res.json({ error: 'No recipe with that name exists!' });
@@ -26,7 +26,7 @@ module.exports = routes => {
   });
  
   // Delete a recipe
-  routes.delete('/admin/recipe/delete-recipe/:id', async (req, res) => {
+  routes.delete('/recipe/delete-recipe/:id', async (req, res) => {
     const { id } = req.params
     return Recipe.findOneAndRemove({ _id: id }).exec()
       .then(res.json(`Recipe with id: ${id} was successfully deleted.`));
